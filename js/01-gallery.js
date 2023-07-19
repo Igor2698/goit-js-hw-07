@@ -15,16 +15,27 @@ const markup = galleryItems.map(image => {
 
 list.insertAdjacentHTML("afterbegin", markup)
 
-list.addEventListener('click', clickOnImage,)
-
+list.addEventListener('click', clickOnImage)
+let instance
 function clickOnImage(event) {
+    event.preventDefault()
     if (event.target.nodeName !== "IMG") {
         return
     }
-    const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
     <img src="${event.target.getAttribute('data-source')}">
-	`).show()
+	`);
+    instance.show();
+}
 
+document.addEventListener('keydown', handleKeyDown);
+function handleKeyDown(event) {
+    if (event.key === 'Escape' && instance) {
+        instance.close();
+
+    }
 
 
 }
+
+
