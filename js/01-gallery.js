@@ -15,8 +15,7 @@ const markup = galleryItems.map(image => {
 
 list.insertAdjacentHTML("afterbegin", markup)
 
-list.addEventListener('click', clickOnImage);
-document.addEventListener('keydown', handleKeyDown);
+list.addEventListener('click', clickOnImage)
 let instance
 function clickOnImage(event) {
     event.preventDefault()
@@ -32,8 +31,17 @@ function clickOnImage(event) {
 
             }
         }
-    });
+    }
+    );
     instance.show();
 }
 
+document.addEventListener('keydown', handleKeyDown);
+function handleKeyDown(event) {
+    if (event.key === 'Escape' && instance) {
+        instance.close();
 
+    }
+
+
+}
