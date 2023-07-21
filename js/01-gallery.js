@@ -25,23 +25,19 @@ function clickOnImage(event) {
     instance = basicLightbox.create(`
     <img src="${event.target.getAttribute('data-source')}">
 	`, {
-        onClose: function handleKeyDown(event) {
-            if (event.key === 'Escape' && instance) {
-                instance.close();
-
-            }
-        }
-    }
-    );
+        onShow() {
+            document.addEventListener('keydown', closeModal);
+        },
+        onClose() {
+            document.removeEventListener('keydown', closeModal);
+        },
+    });
     instance.show();
 }
 
-document.addEventListener('keydown', handleKeyDown);
-function handleKeyDown(event) {
-    if (event.key === 'Escape' && instance) {
-        instance.close();
 
+function closeModal(evt) {
+    if (evt.code === 'Escape') {
+        instance.close()
     }
-
-
 }
