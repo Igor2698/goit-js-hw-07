@@ -3,6 +3,13 @@ const input = document.querySelector('#name-input');
 
 input.addEventListener('input', () => {
 
-    textForHello.textContent = input.value;
+    if (input.value) {
+        textForHello.textContent = input.value;
+        return
+    }
+
+    textForHello.textContent = 'Anonymous!'
+
+
 })
 
