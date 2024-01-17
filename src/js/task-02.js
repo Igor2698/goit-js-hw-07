@@ -22,4 +22,4 @@ ingredients.forEach(ingredient => {
 
 })  
 
-list.append(...elems);
+list.append(...elems)
