@@ -4,46 +4,44 @@ function getRandomHexColor() {
         .padStart(6, 0)}`;
 }
 
-
-
 const input = document.querySelector('input');
-const container = document.querySelector('#controls');
-const boxes = document.querySelector('#boxes')
+const boxes = document.querySelector('#boxes');
+const createButton = document.querySelector('button[data-create]');
+const destroyButton = document.querySelector('button[data-destroy]');
+
 let size = 30;
 
+createButton.addEventListener('click', onCreateButtonClick);
+destroyButton.addEventListener('click', onDestroyButtonClick)
 
-container.addEventListener('click', onButtonClick);
-
-
-function onButtonClick(event) {
-    const button = event.target.closest('button');
-    if (!button || input.value > 100) {
-        return
-        // Якщо клік не на кнопку - виходимо з функції
-    }
-
-    if (button.textContent === 'Create') {
-
-        let newBoxesHTML = ''
-        // Якщо клікаємо на кнопку "Створити", то реалізуємо наступний код
-
-        for (let i = 0; i < input.value; i += 1) {
-            newBoxesHTML += `<div style="width:${size}px; height:${size}px; background-color:${getRandomHexColor()}"></div>`;
-            size += 10;
-        }
-        input.value = 0;
-        boxes.innerHTML = newBoxesHTML;
-        size = 30;
-
-        return
-    }
-    input.value = 0;
+function onCreateButtonClick() {
     boxes.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+
+    if (Number(input.value) > 100) {
+        return
+    }
+
+    for (let i = 0; i < Number(input.value); i += 1) {
+
+        const divEl = document.createElement('div');
+        divEl.style.width = `${size}px`;
+        divEl.style.height = `${size}px`;
+        divEl.style.backgroundColor = getRandomHexColor();
+
+        fragment.appendChild(divEl);
+        size += 10;
+    }
+
+    input.value = 0;
+    boxes.appendChild(fragment);
     size = 30;
+    return
 }
 
-
-
-
-
+function onDestroyButtonClick() {
+    boxes.innerHTML = '';
+    input.value = 0;
+}
 

@@ -3,7 +3,8 @@ console.log(`Number of categories: ${categories.length}`);
 
 
 categories.forEach(elem => {
-    console.log(`Category: ${elem.firstElementChild.textContent} 
-Elements: ${elem.lastElementChild.children.length}`)
-
+    console.log(`Category:
+${elem.firstElementChild.textContent}`);
+    console.log(`Elements: 
+${elem.lastElementChild.children.length}`);
 })
